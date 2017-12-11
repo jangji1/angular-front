@@ -1,0 +1,52 @@
+<div class="pluszone">
+    <header id="header" *ngIf="!isMovie">
+        <h1 *ngIf="page === 0">{{data.lectureNm}}</h1>
+        <h1 *ngIf="page !== 0">{{data.courseNm}}</h1>
+        <button class="btn btn_close" (click)="onClickClose()">닫기</button>
+    </header>
+    <!--메인 페이지-->
+    <div class="main" *ngIf="page === 0">
+        <div class="header">
+            <div class="course">
+                <p class="courseNum" *ngIf="data.courseNum">{{data.courseNum}}</p>
+                <h2 class="courseNm">{{data.courseNm}}</h2>
+            </div>
+        </div>
+        <div class="target">
+            <div class="goal">
+                <div class="inner">{{data.courseGoal}}</div>
+            </div>
+            <button class="btn btn_next" (click)="movePage('next')">시작하기</button>
+        </div>
+    </div>
+    <!--학습 페이지-->
+    <div class="content" *ngIf="page !== 0">
+        <main [ngClass]="{'movie' : isMovie}">
+            <div class="innertube">
+                <!--<pdf *ngIf="data.courseContentsList[page - 1].type === 'img'" #pdf
+                    [source]="'http://dev.agit.us/ggongs/pdf/3.html'">
+                </pdf>
+                <pdf *ngIf="data.courseContentsList[page - 1].type === 'pdf'" #pdf
+                    [source]="'http://dev.agit.us/ggongs/pdf2/3.html'">
+                </pdf>-->
+
+                <img *ngIf="data.courseContentsList[page - 1].type === 'img'" src="{{data.courseContentsList[page - 1].contentUrl}}" alt=""/>
+                <pdf *ngIf="data.courseContentsList[page - 1].type === 'pdf'" #pdf
+                    [source]="data.courseContentsList[page - 1].contentUrl">
+                </pdf>
+                <player *ngIf="data.courseContentsList[page - 1].type === 'movie'" #player 
+                    [source]="data.courseContentsList[page - 1].contentUrl"
+                    [subtitles]=""
+                    [settings]="settings"
+                    [movePage]="movePage"
+                    [movieInfo]="data.courseContentsList[page - 1].movieInfo">
+                </player>
+            </div>
+        </main>
+        <footer id="footer" *ngIf="!isMovie">
+            <button class="btn btn_prev" (click)="movePage('prev')">이전</button>
+            <button *ngIf="page !== data.courseContentsList.length && data.courseContentsList[page].type !== 'movie'" class="btn btn_next" (click)="movePage('next')">다음</button>
+            <button *ngIf="page !== data.courseContentsList.length && data.courseContentsList[page].type === 'movie'" class="btn btn_play" (click)="movePage('next')">학습하기</button>
+        </footer>
+    </div>
+</div>

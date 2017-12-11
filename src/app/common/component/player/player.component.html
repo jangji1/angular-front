@@ -1,0 +1,184 @@
+<div class="custom-video" #customVideo
+    [ngClass]="{'lock' : isLock || isMiniview, 'miniview'  : isMiniview, 'origin' : !isMiniview, 'full' : isFullscreen}"
+    [style.width.px]="settings.width" [style.height.px]="settings.height" 
+    [style.top.px]="settings.top" [style.left.px]="settings.left"
+    (touchstart)="playerIn()" (mousedown)="playerIn()"
+    (touchend)="playerOut()" (mouseup)="playerOut()">
+    <!--비디오-->
+    <div (tap)="lock()" [style.width.%]="100" [style.height.%]="100" >
+        <video class="myvideo" autoplay #myVideo
+            crossOrigin="anonymous"
+            poster="{{movieInfo.movieThumnail}}"
+            (loadedmetadata)="loadmetadata()"
+            (ended)="ended()"
+            (timeupdate)="timeUpdate()"
+            (swipeleft)="rewindForward('-')" 
+            (swiperight)="rewindForward('+')"
+            (play)="startTimer()"
+            (pause)="stopTimer()"
+            (volumechange)="changeVolume()">
+            <source src="{{source}}" type="video/mp4">
+            <track label="Korea subtitles" kind="subtitles" srclang="ko" src="{{subtitles}}" default>
+        </video>
+    </div>
+    <!--헤더-->
+    <div class="video-header">
+        <h1>
+            <span>{{movieInfo.title}}</span>
+            <button class="btn btn-close" (click)="onClickClose()">닫기</button>
+        </h1>
+    </div>
+    <!--배속-->
+    <div class="speed-control">
+        <div class="inner">
+            <button class="btn btn-slower" #btnSlower (click)="alterPlayBackRate('-')">slower</button>
+            <span #txtSpeed class="text"></span><br>x
+            <button class="btn btn-faster" #btnFaster (click)="alterPlayBackRate('+')">faster</button>
+        </div>
+    </div>
+    <!--컨트롤-->
+    <div id="mycontrols" class="mycontrols">
+        <div id="main-control" class="main-control">
+            <div class="seeker">
+                <div class="input-range__track input-range__track--background" #seekbar
+                    [ngClass]="{'active' : seekDrag}"
+                    (mousedown)="touchStartSeek($event)" (touchstart)="touchStartSeek($event)"
+                    (mouseup)="touchEndSeek($event)" (touchend)="touchEndSeek($event)"
+                    (mousemove)="moveSeek($event)" (touchmove)="moveSeek($event)">
+                    <div class="input-range__track input-range__track--active"
+                        [style.width.%]="seekValue"
+                        [style.left.%]="0"></div>
+                    <span class="input-range__slider-container"
+                        [style.left.%]="seekValue">
+                        <div class="input-range__slider" [ngClass]="{'hide' : !seekDrag}"></div>
+                    </span>
+                    <span class="input-range__label" #seekLabel
+                        [ngClass]="{'hide' : !isShowLabel}"
+                        (mousemove)="moveSeek($event)" (touchmove)="moveSeek($event)"></span>
+                    <span class="seek-repeata" #seekRepeatA [ngClass]="{'hide' : !repeata}"></span>
+                    <span class="seek-repeatb" #seekRepeatB [ngClass]="{'hide' : !repeatb}"></span>
+                </div>
+            </div>
+            <div class="control-box">
+                <div class="left">
+                    <div class="display-time">
+                        <span class="current-time" #currentTime></span><span class="total-time" #totalTime></span>
+                    </div>
+                    <button class="btn btn-repeat" #btnRepeat [ngClass]="{'active' : repeata && repeatb}" (click)="repeat()">구간반복</button>
+                </div>
+                <div class="center">
+                    <button class="btn btn-rewind" #btnRewind (click)="rewindForward('-')">뒤로감기</button>
+                    <button class="btn btn-playpause" #btnPlaypause [ngClass]="[video.nativeElement.paused ? 'icon-play' : 'icon-pause']" (click)="playpause()">재생/일시정지</button>
+                    <button class="btn btn-forward" #btnForward (click)="rewindForward('+')">앞으로감기</button>
+                </div>
+                <div class="right">
+                    <button class="btn btn-volume" #btnVolume [ngClass]="{'active' : isVolume}" (click)="volume()">음량</button>
+                    <button class="btn btn-capture" #btnCapture (click)="capture()">메모</button>
+                    <button class="btn btn-full-normal" #btnFullscreen [ngClass]="[isFullscreen ? 'icon-normal' : 'icon-full']" (click)="fullscreen()">화면</button>
+                    <!--<button class="btn btn-mini" #btnMini (click)="miniview()" [ngClass]="{'hide' : isLock, 'miniview' : isMiniview}">Mini</button>-->
+                </div>
+            </div>
+            <!--볼륨-->
+            <div class="vol-control" #volumeCtrl [ngClass]="{'hide' : !isVolume}">
+                <div class="inner">
+                    <div #txtVolume class="text"></div>
+                    <div class="progress"
+                        (touchstart)="touchStartVolume($event)"
+                        (mousedown)="touchStartVolume($event)"
+                        (touchend)="touchEndVolume($event)"
+                        (mouseup)="touchEndVolume($event)"
+                        (mousemove)="progressVolume($event)"
+                        (touchmove)="progressVolume($event)">
+                        <div [ngClass]="{'active' : myVideo.volume > 0.9}" 
+                            (mousedown)="myVideo.volume = 1"
+                            (touchstart)="myVideo.volume = 1"><span>100</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.8}" 
+                            (mousedown)="myVideo.volume = 0.9"
+                            (touchstart)="myVideo.volume = 0.9"><span>90</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.7}" 
+                            (mousedown)="myVideo.volume = 0.8"
+                            (touchstart)="myVideo.volume = 0.8"><span>80</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.6}" 
+                            (mousedown)="myVideo.volume = 0.7"
+                            (touchstart)="myVideo.volume = 0.7"><span>70</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.5}" 
+                            (mousedown)="myVideo.volume = 0.6"
+                            (touchstart)="myVideo.volume = 0.6"><span>60</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.4}" 
+                            (mousedown)="myVideo.volume = 0.5"
+                            (touchstart)="myVideo.volume = 0.5"><span>50</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.3}" 
+                            (mousedown)="myVideo.volume = 0.4"
+                            (touchstart)="myVideo.volume = 0.4"><span>40</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.2}" 
+                            (mousedown)="myVideo.volume = 0.3"
+                            (touchstart)="myVideo.volume = 0.3"><span>30</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0.1}" 
+                            (mousedown)="myVideo.volume = 0.2"
+                            (touchstart)="myVideo.volume = 0.2"><span>20</span></div>
+                        <div [ngClass]="{'active' : myVideo.volume > 0}" 
+                            (mousedown)="myVideo.volume = 0.1"
+                            (touchstart)="myVideo.volume = 0.1"><span>10</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="sub-control">
+            <button class="btn btn-fullscreen" #btnFullscreen (click)="fullscreen()" [ngClass]="[!isFullscreen ? 'icon-fullscreen-exit-alt' : 'icon-fullscreen-alt']">Full</button>
+            <button class="btn btn-lock" #btnLock (click)="lock()" [ngClass]="{'active' : isLock, 'hide' : isMiniview}">Lock</button>
+        </div>-->
+    </div>
+    <!--네비게이터-->
+    <nav class="video-nav">
+        <button class="btn btn-nav" [ngClass]="{'open' : isNav}" (click)="nav()"></button>
+        <div class="video-nav-cont" [ngClass]="{'hide' : !isNav}">
+            <header class="video-nav-header">
+                <div class="inner">
+                    <h1>
+                        <div class="teacher">[수학] 오슬아 선생님</div>
+                        <div class="subj">2017 에이급 수학 2-1 전범위: 천재</div>
+                    </h1>
+                </div>
+            </header>
+            <div class="video-nav-list">
+                <ul>
+                    <li>
+                        <span *ngIf="movieInfo.title"><i></i></span>
+                        <ul>
+                            <li>
+                                <span *ngIf="movieInfo.courseNum && movieInfo.title"><i>{{movieInfo.courseNum}}</i>{{movieInfo.title}}</span>
+                                <ul>
+                                    <li *ngFor="let chapter of movieInfo.courseMovieChapterList; let i = index;">
+                                        <a href="javascript:void(0)"
+                                            [ngClass]="{'active' : selectMovieIdx === i}"
+                                            (click)="setOptions({startTime: HmsToSeconds(chapter.startTime), endTime: HmsToSeconds(chapter.endTime) });selectMovie(i)">
+                                            <span class="idx">{{i+1}}</span>{{chapter.title}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!--캡처 영역-->
+    <canvas class="canvas hide" #canvas></canvas>
+    <a class="canvas-image hide" #canvasImage (click)="downloadCanvas()"></a>
+    <!-- 팝업 -->
+    <!--<div class="close-pop" #closePopup [ngClass]="{'hide' : !isShowPop}">
+        <div class="v-align-helper">
+            <div class="v-align-center">
+                <div class="pop-cont">
+                    <div class="pop-header">종료</div>
+                    <div class="pop-main">공부한 내용을 충분히 이해했나요?<br>다시 한 번 보면 더욱 확실하게 이해할 수 있습니다.</div>
+                    <div class="pop-footer">
+                        <button class="btn btn-pop-cancel" (click)="resume()">취소</button>
+                        <button class="btn btn-pop-close" (click)="showPopup()">동영상 종료</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+</div>

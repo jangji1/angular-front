@@ -1,0 +1,126 @@
+<div class="checktime" #checktime id="checktime">
+  <div class="inner" id="main" #main>
+    <div class="sec" *ngFor="let talkItem of talkViewList; let i = index; let isLast = last" [attr.data-idx]="i">
+
+      <!-- 헬퍼 텍스트 메세지 -->
+      <div class="pull-left" *ngIf="talkItem.owner == 0">
+        <div class="avatar" [ngClass]="{'hidden': i != 0 && talkItem.owner == talkViewList[i-1].owner}">
+          <img src="/assets/img/checktime/ico_avatar.png">
+        </div>
+        <div class="chat">
+          <div class="teacher" [ngClass]="{'hide': i != 0 && talkItem.owner == talkViewList[i-1].owner}">헬퍼 공부세포</div>
+          <ul>
+            <li>
+              <div class="message" [ngClass]="{'first': i == 0 || talkItem.owner != talkViewList[i-1].owner}">
+                <div class="text">{{talkItem.text}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 학생 텍스트 메세지 -->
+      <div class="pull-right" *ngIf="talkItem.owner == 1">
+        <div class="chat">
+          <ul>
+            <li>
+              <div class="message" [ngClass]="{'first': talkItem.owner != talkViewList[i-1].owner}">
+                <div class="text">{{talkItem.text}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <ng-container *ngIf="inputType == 'Q' || inputType == 'S'">
+      <div class="type_q" *ngIf="inputType == 'Q'">
+        <label class="input">
+          <input class="input_text" [(ngModel)]="inputText" placeholder="내용을 입력하세요.">
+          <button type="button" class="btn btn_send" (click)="checkAnswer()">입력</button>
+        </label>
+      </div>
+      <div class="type_s" *ngIf="inputType == 'S'">
+        <span *ngFor="let btn of selectExamples; let i = index">
+          <input type="checkbox" value="1" [(ngModel)]="selectCheck[i]" *ngIf="btn != null && btn != ''"/>{{btn}}
+        </span>
+        <button class="pull-right" type="button" (click)="checkSelect()">입력</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="inputType == 'E' || inputType == 'W'">
+      <div class="type_e" *ngIf="inputType == 'E'">
+        <div class="row">
+          정답 : {{inputText}}
+        </div>
+        <div>
+          <span *ngFor="let btn of selectExamples;let i = index;">
+            <button type="button" [disabled]="selectCheck[i] == 1" (click)="inputTypeE(btn, i)">{{btn}}</button>
+          </span>
+          <button class="pull-right" type="button" (click)="checkSelect()">입력</button>
+        </div>
+      </div>
+      <div class="type_w" *ngIf="inputType == 'W'">
+        <!-- <div class="row">
+          Input : {{inputText}}
+        </div> -->
+        <ng-container *ngFor="let btn of selectExamples;let i = index;">
+          <button class="btn btn_answer" type="button" [disabled]="selectCheck[i] == 1" (click)="inputTypeW(i);">{{btn}}</button>
+        </ng-container>
+        <button class="btn btn_send" type="button" (click)="checkSelect()">입력</button>
+        <span>Input : {{inputText}}</span>
+      </div>
+    </ng-container>
+  </footer>
+</div>
+
+
+<!-- <div class="content">
+  <header id="header">
+    <label>유도학습</label>
+    <button type="button">설정</button>
+  </header>
+  <main id="main" #main>
+    <ul>
+      <li *ngFor="let talkItem of talkViewList">
+        <div talk-view [talkNode]="talkItem"></div>
+      </li>
+    </ul>
+  </main>
+  <footer id="footer" *ngIf="inputType == 'Q' || inputType == 'S'">
+    <div *ngIf="inputType == 'Q'">
+      <input [(ngModel)]="inputText" style="width: 350px">
+      <button type="button" (click)="checkAnswer()">입력</button>
+    </div>
+    <div *ngIf="inputType == 'S'">
+      <span *ngFor="let btn of selectExamples; let i = index">
+                <input type="checkbox" value="1" [(ngModel)]="selectCheck[i]" *ngIf="btn != null && btn != ''"/>{{btn}}
+            </span>
+      <button class="pull-right" type="button" (click)="checkSelect()">입력</button>
+    </div>
+  </footer>
+  <footer id="footerhigh" *ngIf="inputType == 'E' || inputType == 'W'">
+    <div *ngIf="inputType == 'E'">
+      <div class="row">
+        Input : {{inputText}}
+      </div>
+      <div>
+        <span *ngFor="let btn of selectExamples;let i = index;">
+                    <button type="button" [disabled]="selectCheck[i] == 1" (click)="inputTypeE(btn, i)">{{btn}}</button>
+                </span>
+        <button class="pull-right" type="button" (click)="checkSelect()">입력</button>
+      </div>
+    </div>
+    <div *ngIf="inputType == 'W'">
+      <div class="row">
+        Input : {{inputText}}
+      </div>
+      <span *ngFor="let btn of selectExamples;let i = index;">
+                <button type="button" [disabled]="selectCheck[i] == 1" (click)="inputTypeW(i)">{{btn}}</button>
+            </span>
+      <button class="pull-right" type="button" (click)="checkSelect()">입력</button>
+    </div>
+  </footer>
+</div> -->

@@ -1,0 +1,10 @@
+<div class="box clearfix">
+  <div class="pull-left" *ngIf="talkNode.owner == 0">
+    <div class="user">유돌이</div>
+    <div class="message">{{talkNode.text}}</div>
+  </div>
+  <div class="pull-right" *ngIf="talkNode.owner == 1">
+    <div class="user">나</div>
+    <div class="message">{{talkNode.text}}</div>
+  </div>
+</div>

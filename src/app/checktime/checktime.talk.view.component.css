@@ -1,0 +1,34 @@
+.box {
+    
+}
+.box .pull-left {
+    width: 90%;
+    float: left;
+}
+.box .pull-right {
+    width: 90%;
+    float: right;
+}
+.box .user {
+    margin-bottom: 5px;
+}
+.box .pull-left .message {
+    padding: 15px;
+    background: #86BB71;
+    color: #fff;
+    border-radius: 5px;
+}
+.box .pull-right .message {
+    padding: 15px;
+    background: #94C2ED;
+    color: #fff;
+    border-radius: 5px;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}

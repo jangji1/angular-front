@@ -1,0 +1,360 @@
+.checktime {
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 88px;
+  background: #d9ecf2;
+  border-top: 1px solid #c7dae0;
+}
+.checktime .inner {
+  padding: 30px;
+}
+.checktime.info {
+  background: url('/assets/img/checktime/img_info.png') center center no-repeat;
+  background-size: 425.5px 120.5px;
+}
+.checktime .sec:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: ' ';
+  clear: both;
+  height: 0;
+}
+.checktime .date {
+  background: url('/assets/img/checktime/bg_date.png') left center repeat-x;
+  background-size: 1px;
+  text-align: center;
+}
+.checktime .date .inner {
+  padding: 0 10px;
+  background: #fff;
+  color: #666;
+}
+.checktime .chat {
+  max-width: 55%;
+}
+.checktime .chat .text,
+.checktime .chat .image {
+  float: left;
+  padding: 15px 20px;
+  border-radius: 4px;
+  color: #222;
+  font-size: 20px;
+  font-weight: 400;
+}
+.checktime .chat .teacher {
+  margin-bottom: 9px;
+  font-size: 16px;
+  font-weight: 900;
+}
+.checktime ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.checktime .pull-left {
+  width: 100%;
+  float: left;
+  margin-top: 15px;
+}
+.checktime .pull-left .avatar {
+  float: left;
+  margin-right: 20px;
+}
+.checktime .pull-left .avatar.hidden {
+  visibility: hidden;
+  height: 1px;
+}
+.checktime .pull-left .avatar img {
+  width: 68.5px;
+}
+.checktime .pull-left .chat {
+  float: left;
+}
+.checktime .pull-left .chat ul {
+  margin-left: 14.5px;
+}
+.checktime .pull-left .chat ul li {
+  margin-bottom: 14px;
+}
+.checktime .pull-left .chat ul li:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: ' ';
+  clear: both;
+  height: 0;
+}
+.checktime .pull-left .chat ul li:last-child {
+  margin-bottom: 0;
+}
+.checktime .pull-left .chat .message {
+  position: relative;
+  float: left;
+}
+.checktime .pull-left .chat .message.first:before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: -13.5px;
+  width: 14.5px;
+  height: 15px;
+  background: url('/assets/img/checktime/bg_msg_left.png') no-repeat;
+  background-size: contain;
+}
+.checktime .pull-left .chat .message.first .text {
+  border-radius: 0 4px 4px;
+}
+.checktime .pull-left .message .text {
+  background: #fff;
+  border: 1px solid #b9c9ce;
+}
+.checktime .pull-left .message .send-date {
+  position: absolute;
+  width: 75px;
+  right: -80px;
+  bottom: 0;
+  font-size: 15px;
+  color: #999;
+  font-weight: 400;
+}
+.checktime .pull-right {
+  width: 100%;
+  float: right;
+  margin-top: 15px;
+}
+.checktime .pull-right .chat {
+  float: right;
+}
+.checktime .pull-right .chat ul {
+  margin-right: 14.5px;
+}
+.checktime .pull-right .chat ul li {
+  margin-bottom: 14px;
+}
+.checktime .pull-right .chat ul li:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: ' ';
+  clear: both;
+  height: 0;
+}
+.checktime .pull-right .chat ul li:last-child {
+  margin-bottom: 0;
+}
+.checktime .pull-right .chat .message {
+  position: relative;
+  float: right;
+}
+.checktime .pull-right .chat .message.first:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -13.5px;
+  width: 14.5px;
+  height: 15px;
+  background: url('/assets/img/checktime/bg_msg_right.png') no-repeat;
+  background-size: contain;
+}
+.checktime .pull-right .chat .message.first .text,
+.checktime .pull-right .chat .message.first .image {
+  border-radius: 4px 0 4px 4px;
+}
+.checktime .pull-right .message .text,
+.checktime .pull-right .message .image {
+  background: #fcf368;
+  border: 1px solid #e4db4b;
+}
+.checktime .pull-right .message .send-date {
+  position: absolute;
+  width: 75px;
+  left: -80px;
+  bottom: 0;
+  font-size: 15px;
+  color: #999;
+  font-weight: 400;
+}
+.checktime .pull-left .chat .doc {
+  position: relative;
+  float: left;
+  cursor: pointer;
+}
+.checktime .pull-left .chat .doc .text {
+  min-width: 140px;
+  padding: 0;
+  background: #375ee7;
+  color: #fff;
+  font-weight: 400;
+}
+.checktime .pull-left .chat .doc .text .title {
+  padding: 15px 20px;
+  border-bottom: 1px solid #4b6ee9;
+}
+.checktime .pull-left .chat .doc .text .cont {
+  padding: 15px 20px 18px 60px;
+  background: url('/assets/img/checktime/ico_doc.png'), url('/assets/img/checktime/ico_arrow.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: 20px center, calc(100% - 20px) center;
+  background-size: 27px 31px, 11.5px 20.5px;
+}
+.checktime .pull-left .chat .doc .send-date {
+  position: absolute;
+  width: 75px;
+  right: -80px;
+  bottom: 0;
+  font-size: 15px;
+  color: #999;
+  font-weight: 400;
+}
+.checktime .pull-left .chat .cookie {
+  position: relative;
+  float: left;
+}
+.checktime .pull-left .chat .cookie.first:before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: -13.5px;
+  width: 14.5px;
+  height: 15px;
+  background: url('/assets/img/checktime/bg_msg_left.png') no-repeat;
+  background-size: contain;
+}
+.checktime .pull-left .chat .cookie.first .text {
+  border-radius: 0 4px 4px;
+}
+.checktime .pull-left .cookie .text {
+  background: #fff;
+  border: 1px solid #666;
+  padding-left: 70px;
+  background: url('/assets/img/checktime/ico_cookie.png') 20px center no-repeat;
+  background-size: 40.5px 31.5px;
+}
+.checktime .pull-left .cookie .send-date {
+  position: absolute;
+  width: 75px;
+  right: -80px;
+  bottom: 0;
+  font-size: 15px;
+  color: #999;
+  font-weight: 400;
+}
+.hide {
+  display: none;
+}
+
+.checktime #footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 88px; 
+  overflow: hidden;
+  background: #375ee7;
+}
+.checktime .type_w {
+  height: 100%;
+  padding-left: 191px;
+  background: url('/assets/img/checktime/ico_answer.png') 14px center no-repeat;
+  background-size: 110px 60px;
+  line-height: 88px;
+}
+.checktime .type_q {
+   padding: 14px 30px;
+}
+.checktime .type_q .input {
+  overflow: hidden;
+  position: relative;
+  display: block;
+}
+.checktime .type_q .input_text {
+  width: 100%;
+  height: 58px;
+  padding: 0 100px 0 25px;
+  border: 1px solid #314db1;
+  border-radius: 7px;
+  background: #5d80fe;
+  font-size: 25px;
+  color: #fff;
+}
+.checktime .type_q .input_text::placeholder {
+  color: #375ee7;
+}
+.checktime .type_q .btn_send {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  width: 99px;
+  height: 56px;
+  font-size: 25px;
+  color: #222;
+  background: #fcf368;
+  border-left: 1px solid #314db1;
+  border-radius: 0 7px 7px 0;
+}
+.checktime .type_w {
+  position: relative;
+}
+.checktime .type_w .btn_send {
+  width: 99px;
+  height: 56px;
+  font-size: 25px;
+  color: #222;
+  background: #fcf368;
+  border-left: 1px solid #314db1;
+}
+.checktime .btn_answer {
+  width: 203px;
+  height: 62px;
+  background: url('/assets/img/checktime/btn_answer.png') no-repeat;
+  background-size: contain;
+  font-size: 25px;
+  color: #222;
+}
+
+
+/* .content {
+    width: 650px;
+    margin: 20px;
+    background: #C5DDEB;
+    font-family: 'NanumGothic', sans-serif;
+    font-weight: normal;
+    border-radius: 8px;
+}
+#header {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid #fff;
+    font-weight: bold;
+}
+#main {
+    padding: 0 20px;
+    height: 500px;
+    overflow: auto;
+}
+#main ul {
+    padding: 0;
+    list-style: none;
+}
+#main ul li {
+    margin-bottom: 20px;
+}
+
+#footer {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    border-top: 1px solid #fff;
+}
+
+#footerhigh {
+    height: 100px;
+    line-height: 50px;
+    padding: 0 20px;
+    border-top: 1px solid #fff;
+} */

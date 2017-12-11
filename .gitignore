@@ -1,0 +1,6 @@
+/node_modules/
+/.git/
+/aot/
+/.vscode/
+*.log
+npm-debug.log*

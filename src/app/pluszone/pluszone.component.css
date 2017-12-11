@@ -1,0 +1,203 @@
+.pluszone .hide {
+    display: none;
+}
+
+.pluszone #header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 58px;
+    background: #d9ecf2;
+    border-bottom: 1px solid #c7d8de;
+}
+.pluszone #header h1 {
+    margin: 0;
+    padding: 0 0 0 30px;
+    font-size: 20px;
+    line-height: 58px;
+    color: #222;
+    font-weight: 900;
+}
+.pluszone .btn_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 58px;
+    background: url('/assets/img/btn/btn_pluszone_close.png') center center no-repeat;
+    background-size: 20px;
+    border-left: 1px solid #c7d8de;
+}
+.pluszone .btn_close:active {
+    background-color: #c7d8de;
+}
+
+.pluszone .main .header {
+    position: fixed;
+    top: 59px;
+    bottom: 0;
+    left: 0;
+    right: 513px;
+    background: #fff;
+    color: #222;
+}
+.pluszone .main .header .lecture {
+    position: absolute;
+    top: 164px;
+    left: 70px;
+    padding: 0 27px 0 5px;
+    font-size: 24px;
+}
+.pluszone .main .header .lecture:after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    background: #fcf368;
+    width: 100%;
+    height: 15px;
+}
+.pluszone .main .header .course {
+    position: absolute;
+    top: 320px;
+    left: 70px;
+    right: 70px;
+    font-size: 24px;
+}
+.pluszone .main .header .course .courseNum {
+    position: absolute;
+    padding: 0 46px 0 0;
+    margin: 0;
+    font-size: 30px;
+}
+.pluszone .main .header .course .courseNum:after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    left: -2px;
+    bottom: -3px;
+    background: #fcf368;
+    width: 100%;
+    height: 15px;
+}
+.pluszone .main .header .course .courseNm {
+    margin: 71px 0 0;
+    font-size: 40px;
+    line-height: 1.5em;
+    font-weight: 900;
+}
+.pluszone .main .target {
+    position: absolute;
+    top: 59px;
+    bottom: 0;
+    right: 0;
+    width: 513px;
+    overflow: hidden;
+    background: #375ee7 url('/assets/img/ico/ico_goal.png') 203px 59.5px no-repeat;
+    background-size: 136.5px 146.5px;
+}
+.pluszone .main .target .goal {
+    position: absolute;
+    top: 261.5px;
+    left: 59.5px;
+    right: 59.5px;
+    height: 246px;
+    background: url('/assets/img/bg/bg_goal_repeat.png') repeat;
+    background-size: 1px 49.5px;
+    font-size: 21px;
+    line-height: 49.5px;
+    color: #fefefe;
+}
+.pluszone .main .target .goal .inner {
+    padding-top: 50px;
+}
+.pluszone .main .target .btn_next {
+    position: absolute;
+    left: 161px;
+    bottom: 64.5px;
+    width: 191.5px;
+    height: 68px;
+    background: url('/assets/img/btn/btn_pluszone_start.png') no-repeat;
+    background-size: 191.5px 134px;
+    background-position: -0 -66px;
+}
+.pluszone .main .target .btn_next:active {
+    height: 66px;
+    margin-bottom: 2px;
+    background-position: -0 -0;
+}
+
+.pluszone .content main {
+    position: fixed;
+    top: 59px;
+    bottom: 67px;
+    left: 0;
+    right: 0;
+    overflow: auto;
+}
+.pluszone .content main.movie {
+    top: 0;
+    bottom: 0;
+}
+.pluszone .content main .innertube {
+    height: 100%;
+}
+.pluszone .content main .innertube img {
+    display: block;   
+}
+.pluszone .content #footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 67px;
+    background: url('/assets/img/bg/bg_footer.png') 9px 44px repeat-x;
+    background-position: 0 23px;
+}
+.pluszone .content #footer .btn_prev {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 105px;
+    height: 54px;
+    background: url('/assets/img/btn/btn_pluszone_content_prev.png') no-repeat;
+    background-size: 105px 106px;
+    background-position: -0 -52px;
+}
+.pluszone .content #footer .btn_prev:active {
+    height: 52px;
+    margin-bottom: 2px;
+    background-position: -0 -0;
+}
+.pluszone .content #footer .btn_next {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 105px;
+    height: 54px;
+    background: url('/assets/img/btn/btn_pluszone_content_next.png') no-repeat;
+    background-size: 105.5px 106px;
+    background-position: -0 -52px;
+}
+.pluszone .content #footer .btn_next:active {
+    height: 52px;
+    margin-bottom: 2px;
+    background-position: -0 -0;
+}
+.pluszone .content #footer .btn_play {
+    position: absolute;
+    bottom: 13px;
+    right: 20px;
+    width: 139.5px;
+    height: 54px;
+    background: url('/assets/img/btn/btn_pluszone_content_play.png') no-repeat;
+    background-size: 139.5px 106px;
+    background-position: -0 -52px;
+}
+.pluszone .content #footer .btn_play:active {
+    height: 52px;
+    margin-bottom: 2px;
+    background-position: -0 -0;
+}

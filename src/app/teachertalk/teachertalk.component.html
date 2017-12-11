@@ -1,0 +1,91 @@
+<div class="ssamtalk" [ngClass]="{'info': !data}" #ssamtalk id="ssamtalk">
+  <div class="sec" *ngFor="let msg of data; let i = index; let isLast = last" [attr.data-idx]="i">
+    <ng-container *ngIf="i > (data.length-1) - (paging.pageNo * paging.pageSize)">
+      <div class="date" *ngIf="i == 0 || msg.sendDate != data[i-1].sendDate">
+        <span class="inner">{{msg.sendDate}} {{msg.weekIndex | weekday}}</span>
+      </div>
+
+      <!-- 쌤 텍스트 메세지 -->
+      <div class="pull-left" *ngIf="msg.senderId != stuId && msg.msgType == 'T'">
+        <div class="avatar" [ngClass]="{'hidden': i != 0 && msg.senderId == data[i-1].senderId  && msg.sendDate == data[i-1].sendDate}">
+          <img src="/assets/img/ssamtalk/ico_avatar.png">
+        </div>
+        <div class="chat">
+          <div class="teacher" [ngClass]="{'hide': i != 0 && msg.senderId == data[i-1].senderId  && msg.sendDate == data[i-1].sendDate}">{{msg.senderId}}</div>
+          <ul>
+            <li>
+              <div class="message"
+                [ngClass]="{'first': i == 0 || msg.senderId != data[i-1].senderId || msg.sendDate != data[i-1].sendDate}">
+                <div class="text">{{msg.msgContent}}</div>
+                <div class="send-date" [ngClass]="{'hide': msg.resourceList.length > 0 || i < data.length-1 && msg.senderId == data[i+1].senderId && convert12H(msg.sendTime) == convert12H(data[i+1].sendTime)}">{{convert12H(msg.sendTime)}}</div>
+              </div>
+            </li>
+            <li *ngFor="let rsc of msg.resourceList; let j = index;" [attr.data-resource-idx]="j">
+              <div class="doc" (click)="openDoc(rsc.linkKey1)">
+                <div class="text">
+                  <div class="title">{{rsc.linkTitle}}</div>
+                  <div class="cont">PDF</div>
+                </div>
+                <div class="send-date" [ngClass]="{'hide': j < msg.resourceList.length-1}">{{convert12H(msg.sendTime)}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 쌤 쿠키 메세지 -->
+      <div class="pull-left" *ngIf="msg.senderId != stuId && msg.msgType == 'C'">
+        <div class="avatar" [ngClass]="{'hidden': i != 0 && msg.senderId == data[i-1].senderId  && msg.sendDate == data[i-1].sendDate}">
+          <img src="/assets/img/ssamtalk/ico_avatar.png">
+        </div>
+        <div class="chat">
+          <div class="teacher" [ngClass]="{'hide': i != 0 && msg.senderId == data[i-1].senderId  && msg.sendDate == data[i-1].sendDate}">{{msg.senderId}}</div>
+          <ul>
+            <li>
+              <div class="cookie"
+                [ngClass]="{'first': i == 0 || msg.senderId != data[i-1].senderId || msg.sendDate != data[i-1].sendDate}">
+                <div class="text">{{msg.msgContent}}</div>
+                <div class="send-date" [ngClass]="{'hide': i < data.length-1 && msg.senderId == data[i+1].senderId && convert12H(msg.sendTime) == convert12H(data[i+1].sendTime)}">{{convert12H(msg.sendTime)}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 학생 텍스트 메세지 -->
+      <div class="pull-right" *ngIf="msg.senderId == stuId && msg.msgType == 'T'">
+        <div class="chat">
+          <ul>
+            <li>
+              <div class="message"
+                [ngClass]="{'first': msg.senderId != data[i-1].senderId || msg.sendDate != data[i-1].sendDate}"
+                (press)="deleteConfirm(msg.talkNo, i)">
+                <div class="text">{{msg.msgContent}}</div>
+                <div class="send-date" [ngClass]="{'hide': i < data.length-1 && msg.senderId == data[i+1].senderId && convert12H(msg.sendTime) == convert12H(data[i+1].sendTime)}">{{convert12H(msg.sendTime)}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 학생 이미지 메세지 -->
+      <div class="pull-right" *ngIf="msg.senderId == stuId && msg.msgType == 'I'">
+        <div class="chat">
+          <ul>
+            <li>
+              <div class="message"
+                [ngClass]="{'first': msg.senderId != data[i-1].senderId || msg.sendDate != data[i-1].sendDate}"
+                (press)="deleteConfirm(msg.talkNo, i)">
+                <div class="image">
+                  <img src={{msg.msgContent}} alt="">
+                </div>
+                <div class="send-date" [ngClass]="{'hide': i < data.length-1 && msg.senderId == data[i+1].senderId && convert12H(msg.sendTime) == convert12H(data[i+1].sendTime)}">{{convert12H(msg.sendTime)}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+    </ng-container>
+  </div>
+</div>
